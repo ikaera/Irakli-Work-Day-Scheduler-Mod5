@@ -15,15 +15,20 @@ $(function () {
   //
 
 
-  $('.saveBtn').on('click', function (e) {
+  $('.saveBtn').click(function (e) {
     e.preventDefault();
     let textarea = $(this).siblings('textarea');
     let parent = $(this).parent();
     // console.log(textarea);
-    localStorage.setItem(parent.attr('id'), textarea.val());
+    localStorage.setItem(parent.attr('id'), (textarea.val()));
     // localStorage.setItem("hour-10", hour-10);
     // localStorage.setItem("hour-11", hour-11);
-    // textarea.text(localStorage.getItem(parent.attr('id')));
+    // let input = JSON.parse(localStorage.getItem($(this).parent().attr('id')));
+    // console.log(input);
+    // let savedInput = $('<p>');
+    // console.log(savedInput);
+    // savedInput.text(input);
+    // parent.append(savedInput);
   })
   // TODO: Add code to apply the past, present, or future class to each time
   // block by comparing the id to the current hour. HINTS: How can the id
@@ -32,45 +37,58 @@ $(function () {
   // current hour in 24-hour time?
   //
 
-  $('.time-block').each(function () {
-    // console.log(this);
+  function timeTracker() {
     let currentHour = dayjs().hour() // gets current hour
-    let timeId = $(this).attr('id');
-    let parsedTimeId = Number.parseInt(timeId.split('-')[1]);   
+    $('.time-block').each(function () {
+      // console.log(this);
 
-    if (parsedTimeId === currentHour) {
-      console.log('on current block', timeId, currentHour);
-      // $(this).addClass('present');
-      // $(this).removeClass('past');
-      // $(this).removeClass('future');      
-    }
+      let timeId = $(this).attr('id');
+      let parsedTimeId = Number.parseInt(timeId.split('-')[1]);
 
-    if (parsedTimeId < currentHour) {
-      $(this).addClass('past');
-      // $(this).removeClass('present');
-      // $(this).removeClass('future');
-      console.log('on current block', timeId, currentHour);
-    }
+      if (parsedTimeId === currentHour) {
+        console.log('on current block', timeId, currentHour);
+        $(this).addClass('present');
+        $(this).removeClass('past');
+        $(this).removeClass('future');
+      } else if (parsedTimeId < currentHour) {
+        $(this).addClass('past');
+        $(this).removeClass('present');
+        $(this).removeClass('future');
+        console.log('on current block', timeId, currentHour);
+      } else  {
+        $(this).addClass('future');
+        $(this).removeClass('past');
+        $(this).removeClass('present');
+        console.log('on current block', timeId, currentHour);
+      }
 
-    if (parsedTimeId > currentHour) {
-      $(this).addClass('future');
-      $(this).removeClass('past');
-      $(this).removeClass('present');
-      console.log('on current block', timeId, currentHour);
-    }
+    })
+    // TODO: Add code to get any user input that was saved in localStorage and set
+    // the values of the corresponding textarea elements. HINT: How can the id
+    // attribute of each time-block be used to do this?
+    //
 
-  })
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //
-  let textarea = $(this).siblings('textarea');
-  textarea.text(localStorage.getItem($(this).parent().attr('id')));
+    $('#hour-9 .description').val(localStorage.getItem('hour-9'));
+    $('#hour-10 .description').val(localStorage.getItem('hour-10'));
+    $('#hour-11 .description').val(localStorage.getItem('hour-11'));
+    $('#hour-12 .description').val(localStorage.getItem('hour-12'));
+    $('#hour-13 .description').val(localStorage.getItem('hour-13'));
+    $('#hour-14 .description').val(localStorage.getItem('hour-14'));
+    $('#hour-15 .description').val(localStorage.getItem('hour-15'));
+    $('#hour-16 .description').val(localStorage.getItem('hour-16'));
+    $('#hour-17 .description').val(localStorage.getItem('hour-17'));
 
 
-  // TODO: Add code to display the current date in the header of the page.
-  let today = dayjs();
-  $('#currentDay').text(today.format('dddd, MMMM D, YYYY,  h:mm a'));
+  }
+  timeTracker();
 
+    // let textarea = $(this).siblings('textarea');
+    // textarea.text(JSON.parse(localStorage.getItem($(this).parent().attr('id'))));
+
+
+    // TODO: Add code to display the current date in the header of the page.
+    let today = dayjs();
+    $('#currentDay').text(today.format('dddd, MMMM D, YYYY,  h:mm a'));
+  
 });
 // });
