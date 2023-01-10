@@ -13,8 +13,6 @@ $(function () {
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
   //
-
-
   $('.saveBtn').click(function (e) {
     e.preventDefault();
     let textarea = $(this).siblings('textarea');
@@ -55,7 +53,7 @@ $(function () {
         $(this).removeClass('present');
         $(this).removeClass('future');
         console.log('on current block', timeId, currentHour);
-      } else  {
+      } else {
         $(this).addClass('future');
         $(this).removeClass('past');
         $(this).removeClass('present');
@@ -77,18 +75,19 @@ $(function () {
     $('#hour-15 .description').val(localStorage.getItem('hour-15'));
     $('#hour-16 .description').val(localStorage.getItem('hour-16'));
     $('#hour-17 .description').val(localStorage.getItem('hour-17'));
-
-
   }
   timeTracker();
 
-    // let textarea = $(this).siblings('textarea');
-    // textarea.text(JSON.parse(localStorage.getItem($(this).parent().attr('id'))));
+  // let textarea = $(this).siblings('textarea');
+  // textarea.text(JSON.parse(localStorage.getItem($(this).parent().attr('id'))));
 
 
-    // TODO: Add code to display the current date in the header of the page.
+  // TODO: Add code to display the current date in the header of the page.
+  function displayTime() {
     let today = dayjs();
-    $('#currentDay').text(today.format('dddd, MMMM D, YYYY,  h:mm a'));
-  
+    $('#currentDay').text(today.format('dddd,  MMMM DD, YYYY [at] hh:mm:ss a'));
+  }
+  displayTime();
+  setInterval(displayTime, 1000);
 });
 // });
