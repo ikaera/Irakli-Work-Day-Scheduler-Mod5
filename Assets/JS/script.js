@@ -1,3 +1,4 @@
+// add jQuery show() method to show massage for a few seconds. 
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
@@ -85,7 +86,7 @@ $(function () {
   // TODO: Add code to display the current date in the header of the page.
   function displayTime() {
     let today = dayjs();
-    $('#currentDay').text(today.format('dddd,  MMMM DD, YYYY [at] hh:mm:ss a'));
+    $('#currentDay').text(today.format('dddd,  MMMM DD[th], YYYY [at] hh:mm:ss a'));
   }
   displayTime();
   setInterval(displayTime, 1000);
