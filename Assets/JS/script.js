@@ -20,6 +20,14 @@ $(function () {
     let parent = $(this).parent();
     // console.log(textarea);
     localStorage.setItem(parent.attr('id'), (textarea.val()));
+
+    $('#notify').addClass('show');
+
+    setTimeout(function() {
+      $('#notify').removeClass('show');
+      $('#notify').addClass('hide');
+    }, 4000);
+
     // localStorage.setItem("hour-10", hour-10);
     // localStorage.setItem("hour-11", hour-11);
     // let input = JSON.parse(localStorage.getItem($(this).parent().attr('id')));
